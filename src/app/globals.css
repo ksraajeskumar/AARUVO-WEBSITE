@@ -910,3 +910,54 @@ body {
     animation: splash-out 0.2s linear forwards;
   }
 }
+
+/* ── Route-transition skeleton ───────────────────────────────────────────
+   Used by app/loading.tsx while the next route streams in. */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #eef1f5 0%,
+    #f7f9fb 40%,
+    #eef1f5 80%
+  );
+  background-size: 300% 100%;
+  animation: skeleton-sweep 1.25s ease-in-out infinite;
+}
+
+@keyframes skeleton-sweep {
+  from {
+    background-position: 120% 0;
+  }
+  to {
+    background-position: -20% 0;
+  }
+}
+
+/* ── Nav click feedback ──────────────────────────────────────────────────
+   Fills under the clicked link the moment it is pressed, so there is a
+   response even when the route data has not arrived yet (dev mode has no
+   prefetch, and slow networks can outrun it). */
+.nav-pending {
+  transform-origin: left;
+  animation: nav-pending 1.1s cubic-bezier(0.16, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes nav-pending {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+
+  .nav-pending {
+    animation: none;
+    transform: scaleX(1);
+  }
+}

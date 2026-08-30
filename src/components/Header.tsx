@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
+import NavPending from "./NavPending";
 
 const NAV = [
   { label: "What we do", href: "/what-we-do" },
@@ -88,7 +89,7 @@ export default function Header() {
                   )}
                 >
                   {item.label}
-                  {active && (
+                  {active ? (
                     <motion.span
                       layoutId="nav-active"
                       transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
@@ -97,6 +98,8 @@ export default function Header() {
                         onDark ? "bg-white" : "bg-brand"
                       )}
                     />
+                  ) : (
+                    <NavPending tone={onDark ? "dark" : "light"} />
                   )}
                 </Link>
               );
@@ -181,15 +184,17 @@ export default function Header() {
                     onClick={() => setMobileOpen(false)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex items-center justify-between border-b border-line/70 py-3 text-[16px] last:border-0",
+                      "relative flex items-center justify-between border-b border-line/70 py-3 text-[16px] last:border-0",
                       active
                         ? "font-semibold text-brand"
                         : "font-medium text-navy"
                     )}
                   >
                     {item.label}
-                    {active && (
+                    {active ? (
                       <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+                    ) : (
+                      <NavPending tone="light" />
                     )}
                   </Link>
                 );
