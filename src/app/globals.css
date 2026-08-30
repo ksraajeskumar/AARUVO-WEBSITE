@@ -1,0 +1,843 @@
+@import "tailwindcss";
+
+/*
+ * AARUVO brand. Both values are taken straight from the supplied logo:
+ * the mark's red and the wordmark's near-black.
+ */
+@theme {
+  --color-navy: #060c17;
+  --color-slate-body: #4a5361;
+  --color-muted: #8a919c;
+  --color-brand: #fc393a;
+  --color-brand-hover: #e02a2b;
+  --color-line: #e8eaee;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+}
+
+/*
+ * Every size below is the reference measurement divided by the reference
+ * viewport (1898px), so the layout holds the same proportions at any width
+ * instead of collapsing to flush-left on smaller screens.
+ */
+:root {
+  --gutter: clamp(20px, 2.635vw, 62px); /* 50px @ 1898 */
+  --hero-indent: clamp(24px, 10.54vw, 250px); /* 200px */
+  --header-h: clamp(68px, 4.9vw, 108px); /* 94px */
+  --nav-gap: clamp(14px, 1.6vw, 34px); /* 31px */
+  --nav-size: clamp(14px, 0.96vw, 21px); /* 18px */
+  --logo-size: clamp(24px, 1.56vw, 35px); /* 30px */
+  --h1-size: clamp(30px, 2.582vw, 58px); /* 49px */
+  --body-size: clamp(15px, 0.896vw, 20px); /* 17px */
+  --hero-pt: clamp(40px, 4vw, 90px); /* 76px */
+  --hero-h1-mt: clamp(28px, 3.48vw, 78px); /* 66px */
+  --hero-cta-mt: clamp(28px, 3.16vw, 71px); /* 60px */
+  --hero-pb: clamp(40px, 3.53vw, 79px); /* 67px */
+  --logobar-py: clamp(24px, 2vw, 45px); /* 38px */
+  --logobar-gap: clamp(56px, 6.85vw, 160px); /* 130px */
+  --logo-brand: clamp(20px, 1.475vw, 34px); /* 28px */
+  --btn-px: clamp(22px, 2.53vw, 57px); /* 48px */
+  --btn-py: clamp(16px, 1.32vw, 30px); /* 25px */
+  --pill-px: clamp(16px, 1.37vw, 31px); /* 26px */
+  --pill-py: clamp(11px, 0.79vw, 18px); /* 15px */
+  /* Brand band on the hero's right edge, and the pitch of the marks in it. */
+  --ribbon-w: clamp(46px, 4.6vw, 88px);
+  --ribbon-item: clamp(180px, 17.9vw, 340px);
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --hero-indent: var(--gutter);
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  /* clip, not hidden: overflow-x:hidden turns the body into a scroll
+     container, which silently disables every position:sticky on the page. */
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── Hero ribbon: the brand band down the hero's right edge ─────────────── */
+
+.hero-ribbon {
+  position: absolute;
+  /* starts under the header, so the nav and its buttons stay on white */
+  top: var(--header-h);
+  right: 0;
+  bottom: 0;
+  width: var(--ribbon-w);
+  overflow: hidden;
+  background: var(--color-brand);
+  pointer-events: none;
+  z-index: 20;
+}
+
+.ribbon-track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  animation: ribbon-run 34s linear infinite;
+}
+
+@keyframes ribbon-run {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+/* ── Thread bands: the woven ribbons under the What we do hero ─────────── */
+
+.threads {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 30vw, 560px);
+  overflow: hidden;
+}
+
+.threads > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * The thread holds its shape and slides along its own axis by exactly one
+ * wave, so the picture at the end of the loop is the one it started with and
+ * the words appear to travel down the thread. One composited transform per
+ * band, no JS.
+ */
+.thread-drift {
+  animation: thread-drift 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes thread-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--drift));
+  }
+}
+
+.thread-sway {
+  /* view-box units, so the swing pivots on the middle of the frame instead of
+     on the SVG origin, where a fraction of a degree throws the thread clean
+     out of the picture. */
+  transform-box: view-box;
+  transform-origin: 660px 260px;
+  animation: thread-sway 13s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes thread-sway {
+  0%,
+  100% {
+    transform: translateY(calc(var(--sway) * -1))
+      rotate(calc(var(--sway-rot) * -1));
+  }
+  50% {
+    transform: translateY(var(--sway)) rotate(var(--sway-rot));
+  }
+}
+
+.thread-word {
+  fill: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+/* ── Solutions section ─────────────────────────────────────────────────── */
+:root {
+  --sec-mt: clamp(56px, 6.3vw, 132px);
+  --sec-gap: clamp(36px, 3.58vw, 78px); /* 68px */
+  /* The section heading reads at the same scale as the hero h1, and the
+     section shares the hero's indent so both left edges line up. */
+  --sec-h2: var(--h1-size);
+  --card-title: clamp(19px, 1.37vw, 30px); /* 26px */
+  --card-pad: clamp(16px, 1.16vw, 26px); /* 22px */
+  --card-h: clamp(500px, 35.5vw, 760px); /* 674px */
+}
+
+/* ── Platform section ──────────────────────────────────────────────────── */
+:root {
+  --card3-h: clamp(580px, 43vw, 900px);
+}
+
+/*
+ * Particle fields twinkle in three offset phases rather than per-dot, so a
+ * 900-dot field animates as three compositor layers instead of 900.
+ */
+@keyframes dust-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.62;
+  }
+}
+
+.dust-layer {
+  animation: dust-twinkle 5.5s ease-in-out infinite;
+}
+.dust-layer-1 {
+  animation-duration: 7.5s;
+  animation-delay: -2.4s;
+}
+.dust-layer-2 {
+  animation-duration: 9.5s;
+  animation-delay: -5.1s;
+}
+
+@keyframes dust-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dust-spin {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: dust-spin 90s linear infinite;
+}
+
+@keyframes globe-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-6px, 5px, 0) scale(1.015);
+  }
+}
+
+.globe-drift {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: globe-drift 20s ease-in-out infinite;
+}
+
+/* A short dash chases the full arc length, reading as money in transit. */
+@keyframes arc-comet {
+  from {
+    stroke-dashoffset: var(--arc-len);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.arc-comet {
+  animation: arc-comet linear infinite;
+}
+
+@keyframes node-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.85;
+  }
+  70%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+.node-pulse {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: node-pulse 3.2s ease-out infinite;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  50% {
+    transform: translate3d(-50%, -9px, 0);
+  }
+}
+
+.pill-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes issue-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+.pay-float,
+.issue-float {
+  animation: issue-float 8s ease-in-out infinite;
+}
+
+@keyframes issue-sweep {
+  0%,
+  100% {
+    background-position: 42% 58%;
+  }
+  50% {
+    background-position: 58% 42%;
+  }
+}
+
+.issue-sweep {
+  animation: issue-sweep 14s ease-in-out infinite;
+}
+
+@keyframes issue-sheen {
+  0% {
+    transform: translate3d(-40%, -34%, 0) rotate(22deg);
+  }
+  100% {
+    transform: translate3d(240%, -34%, 0) rotate(22deg);
+  }
+}
+
+.issue-sheen {
+  animation: issue-sheen 6.5s ease-in-out infinite;
+}
+
+/* ── Embed section ─────────────────────────────────────────────────────── */
+
+/*
+ * The corner artworks are hatch fills faded by a mask, so the stripes thin out
+ * into the card instead of ending on a hard edge.
+ */
+.embed-stripes {
+  background-size: 200% 200%;
+  transition: background-position 900ms ease-out;
+}
+
+.embed-stripes-purple {
+  background-image:
+    repeating-linear-gradient(
+      118deg,
+      rgba(99, 91, 255, 0.85) 0 1.6px,
+      rgba(99, 91, 255, 0) 1.6px 8px
+    ),
+    linear-gradient(272deg, rgba(109, 74, 224, 0.5) 0%, rgba(109, 74, 224, 0) 26%),
+    radial-gradient(
+      46% 62% at 100% 0%,
+      rgba(124, 92, 245, 0.5) 0%,
+      rgba(124, 92, 245, 0) 72%
+    );
+  background-position: 30% 70%;
+  -webkit-mask-image: radial-gradient(
+    54% 96% at 100% 0%,
+    #000 0%,
+    rgba(0, 0, 0, 0.62) 42%,
+    transparent 76%
+  );
+  mask-image: radial-gradient(
+    54% 96% at 100% 0%,
+    #000 0%,
+    rgba(0, 0, 0, 0.62) 42%,
+    transparent 76%
+  );
+}
+
+.embed-stripes-pink {
+  background-image:
+    repeating-linear-gradient(
+      52deg,
+      rgba(233, 60, 105, 0.85) 0 1.6px,
+      rgba(233, 60, 105, 0) 1.6px 8px
+    ),
+    linear-gradient(22deg, rgba(214, 31, 84, 0.95) 0%, rgba(233, 60, 105, 0.3) 26%, rgba(233, 60, 105, 0) 48%);
+  background-position: 70% 30%;
+  -webkit-mask-image: radial-gradient(
+    52% 74% at 0% 100%,
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 44%,
+    transparent 76%
+  );
+  mask-image: radial-gradient(
+    52% 74% at 0% 100%,
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 44%,
+    transparent 76%
+  );
+}
+
+/* The elbow keeps marching so the link between receipt and row stays legible. */
+@keyframes connector-march {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+.connector-dash {
+  animation: connector-march 3s linear infinite;
+}
+
+/* ── Embed hover ───────────────────────────────────────────────────────── */
+
+.embed-card:hover .receipt-lift {
+  transform: translateY(-1.1cqw) rotate(-1.1deg);
+  box-shadow:
+    0 3px 10px rgba(20, 20, 43, 0.1),
+    0 30px 60px rgba(20, 20, 43, 0.18);
+}
+
+.embed-card:hover .browser-lift {
+  transform: translateY(-0.55cqw);
+}
+
+.embed-card:hover .acct-row-active {
+  background: #f4f7ff;
+}
+
+.embed-card:hover .connector-dash {
+  animation-duration: 1s;
+}
+
+.embed-card:hover .embed-stripes-purple {
+  background-position: 46% 54%;
+}
+
+.embed-card:hover .embed-stripes-pink {
+  background-position: 54% 46%;
+}
+
+/* ── Sessions banner ───────────────────────────────────────────────────── */
+
+@keyframes band-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate3d(0, -6px, 0) scaleY(1.035);
+    opacity: 0.86;
+  }
+}
+
+.band {
+  transform-box: fill-box;
+  transform-origin: 0% 50%;
+  animation: band-breathe 9s ease-in-out infinite;
+}
+
+@keyframes fan-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-14px, 4px, 0);
+  }
+}
+
+.band-fan {
+  animation: fan-drift 16s ease-in-out infinite;
+}
+
+.sessions-banner:hover .stage-scene {
+  transform: scale(1.045);
+}
+
+.sessions-banner:hover .band {
+  animation-duration: 3.4s;
+}
+
+.sessions-banner:hover .band-fan {
+  animation-duration: 6s;
+}
+
+/* ── Backbone section ──────────────────────────────────────────────────── */
+:root {
+  --stat-num: clamp(26px, 2.4vw, 48px);
+  --stat-label: clamp(12px, 0.82vw, 17px);
+}
+
+/* ── Customer stories ──────────────────────────────────────────────────── */
+:root {
+  --cust-lead: clamp(16px, 1.16vw, 23px);
+  --cust-body: clamp(13px, 0.85vw, 17px);
+  --cust-title: clamp(14px, 0.95vw, 19px);
+  --cust-small: clamp(11px, 0.74vw, 15px);
+  --quote-size: clamp(17px, 1.32vw, 27px);
+  --connect-h1: clamp(38px, 3.35vw, 74px);
+  --connect-h2: clamp(28px, 2.42vw, 54px);
+  --connect-stat: clamp(24px, 1.85vw, 40px);
+  --connect-card-h: clamp(21px, 1.55vw, 34px);
+  --connect-sub: clamp(22px, 1.72vw, 38px);
+  --connect-quote: clamp(15px, 1.06vw, 23px);
+  --connect-code: clamp(10px, 0.72vw, 16px);
+  --ent-h1: clamp(40px, 3.6vw, 80px);
+  --ent-h2: clamp(30px, 2.6vw, 58px);
+  --ent-stat: clamp(38px, 3.1vw, 68px);
+  --ent-big: clamp(64px, 6.4vw, 142px);
+}
+
+/* ── Enterprise detail cards ───────────────────────────────────────────── */
+
+/* Payment tiles drift on their own tracks so the stack keeps breathing. */
+@keyframes ent-tile {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+.ent-tile {
+  animation: ent-tile 6s ease-in-out infinite;
+}
+.ent-tile-2 {
+  animation: ent-tile 7.4s ease-in-out infinite;
+  animation-delay: -1.6s;
+}
+.ent-tile-3 {
+  animation: ent-tile 8.6s ease-in-out infinite;
+  animation-delay: -3.2s;
+}
+
+.ent-float-slow {
+  animation: ent-tile 9s ease-in-out infinite;
+}
+
+@keyframes ent-sign {
+  from {
+    stroke-dashoffset: 230;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ent-sign {
+  animation: ent-sign 3.4s ease-in-out infinite alternate;
+}
+
+@keyframes ent-bar {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.ent-bar {
+  transform-origin: 50% 100%;
+  animation: ent-bar 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ent-row {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.ent-row {
+  animation: ent-row 0.6s ease-out both;
+}
+
+@keyframes ent-arc {
+  from {
+    stroke-dashoffset: 360;
+  }
+  to {
+    stroke-dashoffset: -360;
+  }
+}
+
+.ent-arc {
+  animation: ent-arc 9s linear infinite;
+}
+
+@keyframes ent-dune {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+  }
+  50% {
+    transform: translate3d(-2%, 0, 0) scaleY(1.07);
+  }
+}
+
+.ent-dune {
+  animation: ent-dune 18s ease-in-out infinite;
+}
+.ent-dune-2 {
+  animation: ent-dune 24s ease-in-out infinite reverse;
+}
+
+/* ── Enterprise hero ───────────────────────────────────────────────────── */
+
+/* The silk backdrop drifts rather than loops, so the ridge keeps breathing. */
+@keyframes ent-wave {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-3%, 2%, 0) scale(1.07);
+  }
+}
+
+.ent-wave {
+  animation: ent-wave 22s ease-in-out infinite;
+}
+
+.ent-wave-2 {
+  animation: ent-wave 28s ease-in-out infinite reverse;
+}
+
+@keyframes ent-ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+.ent-ticker {
+  animation: ent-ticker 46s linear infinite;
+}
+
+@keyframes ent-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(var(--r, 0deg));
+  }
+}
+
+.ent-card-1 {
+  animation: ent-float 9s ease-in-out infinite;
+}
+
+/* Hovering settles the float so the Explore link is a stable click target. */
+.ent-card-1:hover,
+.ent-card-2:hover,
+.ent-card-3:hover {
+  animation-play-state: paused;
+}
+.ent-card-2 {
+  --r: 4deg;
+  animation: ent-float 10.5s ease-in-out infinite;
+  animation-delay: -1.4s;
+}
+.ent-card-3 {
+  --r: 9deg;
+  animation: ent-float 12s ease-in-out infinite;
+  animation-delay: -2.8s;
+}
+
+/* ── Funds flow ────────────────────────────────────────────────────────── */
+
+/* Chevrons pulse along each hop so the money reads as moving. */
+@keyframes funds-arrow {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.funds-arrow {
+  animation: funds-arrow 1.6s ease-in-out infinite;
+}
+
+@keyframes risk-gauge {
+  from {
+    stroke-dashoffset: 82;
+  }
+  to {
+    stroke-dashoffset: 16;
+  }
+}
+
+.risk-gauge {
+  animation: risk-gauge 1.6s ease-out both;
+}
+
+/* code token colours shared by the funds panels */
+.c-k {
+  color: #79b8ff;
+}
+.c-f {
+  color: #b392f0;
+}
+.c-s {
+  color: #ffab70;
+}
+.c-n {
+  color: #f7c948;
+}
+
+/* ── Connect ribbon ────────────────────────────────────────────────────── */
+
+/* The colour bands travel along the band rather than the band moving, so the
+   diagonal stays put while the gradient reads as flowing. */
+@keyframes ribbon-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.ribbon-flow {
+  animation: ribbon-flow 18s linear infinite;
+}
+
+@keyframes ribbon-sheen {
+  0% {
+    transform: translate3d(-120%, 0, 0);
+  }
+  100% {
+    transform: translate3d(520%, 0, 0);
+  }
+}
+
+.ribbon-sheen {
+  animation: ribbon-sheen 7s ease-in-out infinite;
+}
+
+/* The tab bar doubles as the timer for the quote that is showing. */
+@keyframes tab-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes quote-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Infrastructure ────────────────────────────────────────────────────── */
+
+/* A short dash runs each connector, so the graph reads as live traffic. */
+@keyframes wire-pulse {
+  from {
+    stroke-dashoffset: 64;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.wire-pulse {
+  animation: wire-pulse linear infinite;
+}
+
+@keyframes wave-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+.wave-line {
+  transform-box: fill-box;
+  transform-origin: 0% 50%;
+  animation: wave-breathe 7s ease-in-out infinite;
+}
+
+@keyframes wave-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+  }
+  50% {
+    transform: translate3d(-10px, 0, 0) scaleY(1.05);
+  }
+}
+
+.wave-fan {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: wave-drift 15s ease-in-out infinite;
+}
+
+/* ── Partner orbits ────────────────────────────────────────────────────── */
+
+/*
+ * Rings alternate direction; every badge runs the same animation the other way
+ * at its ring's speed, which cancels the spin and keeps the wordmark level.
+ */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbit-frame {
+  container-type: inline-size;
+}
+
+.orbit-cw,
+.orbit-ccw {
+  animation-name: orbit-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.orbit-ccw {
+  animation-direction: reverse;
+}
