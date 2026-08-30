@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import ConnectAccept from "@/components/connect/ConnectAccept";
 import ConnectCards from "@/components/connect/ConnectCards";
 import ConnectCompliance from "@/components/connect/ConnectCompliance";
-import ConnectCta from "@/components/connect/ConnectCta";
 import ConnectDeepDive from "@/components/connect/ConnectDeepDive";
 import ConnectFunds from "@/components/connect/ConnectFunds";
 import ConnectMonetise from "@/components/connect/ConnectMonetise";
@@ -114,7 +113,6 @@ export default function WhatWeDo() {
       <ConnectCompliance />
       <ConnectSolutions />
       <ConnectDeepDive />
-      <ConnectCta />
     </main>
   );
 }

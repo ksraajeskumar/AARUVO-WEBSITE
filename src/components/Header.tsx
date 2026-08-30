@@ -14,6 +14,11 @@ const NAV = [
   { label: "Contact us", href: "/contact" },
 ];
 
+/** Matches the section, so a nested route still lights up its top-level tab. */
+function isActive(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -63,20 +68,39 @@ export default function Header() {
           </Link>
 
           <nav className="hidden flex-1 items-center gap-[var(--nav-gap)] lg:flex">
-            {NAV.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={cn(
-                  "py-2 text-[length:var(--nav-size)] font-medium transition-colors duration-200",
-                  onDark
-                    ? "text-white hover:text-white/70"
-                    : "text-navy hover:text-brand"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) => {
+              const active = isActive(pathname, item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "relative py-2 text-[length:var(--nav-size)] transition-colors duration-200",
+                    active ? "font-semibold" : "font-medium",
+                    onDark
+                      ? active
+                        ? "text-white"
+                        : "text-white/70 hover:text-white"
+                      : active
+                        ? "text-brand"
+                        : "text-navy hover:text-brand"
+                  )}
+                >
+                  {item.label}
+                  {active && (
+                    <motion.span
+                      layoutId="nav-active"
+                      transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                      className={cn(
+                        "absolute inset-x-0 -bottom-0.5 h-[2px] rounded-full",
+                        onDark ? "bg-white" : "bg-brand"
+                      )}
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="ml-auto hidden items-center gap-2.5 lg:flex">
@@ -148,15 +172,28 @@ export default function Header() {
             className="overflow-hidden bg-white shadow-[0_12px_30px_rgba(50,50,93,0.13)] lg:hidden"
           >
             <div className="px-[var(--hero-indent)] pb-5 pt-1">
-              {NAV.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="block border-b border-line/70 py-3 text-[16px] font-medium text-navy last:border-0"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {NAV.map((item) => {
+                const active = isActive(pathname, item.href);
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex items-center justify-between border-b border-line/70 py-3 text-[16px] last:border-0",
+                      active
+                        ? "font-semibold text-brand"
+                        : "font-medium text-navy"
+                    )}
+                  >
+                    {item.label}
+                    {active && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+                    )}
+                  </Link>
+                );
+              })}
               <div className="flex gap-2.5 pt-4">
                 <a
                   href="#"

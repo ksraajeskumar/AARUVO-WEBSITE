@@ -97,13 +97,13 @@ export default function ConnectCompliance() {
           img="/aaruvo-help.svg"
           tint="linear-gradient(180deg,rgba(6,12,23,0.62) 0%,rgba(6,12,23,0.84) 55%,rgba(6,12,23,0.93) 100%)"
           logo={
-            <span className="text-[length:var(--connect-sub)] font-medium italic tracking-[-0.02em] text-white">
-              we<span className="font-semibold">travel</span>
+            <span className="text-[length:var(--connect-sub)] font-medium tracking-[-0.02em] text-white">
+              A <span className="font-semibold">help desk</span>
             </span>
           }
-          quote="Connect allows us to achieve compliance with minimal effort, spend practically no time on payments-related customer support, and keep the user experience on our platform. And, it's reassuring to know that when we're expanding to a new country, AARUVO will be ready for us."
-          name="Sample name"
-          role="Chief Product Officer and Co-founder"
+          quote="Almost nobody writes to us about payments any more. People can see what they paid for and what is still coming, so they stop worrying. When we started taking orders in a new town, nothing had to change."
+          name="A help desk team"
+          role="example story"
         />
       </div>
     </Frame>

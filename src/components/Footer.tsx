@@ -6,12 +6,10 @@ const COLUMNS: { title: string; links: string[] }[][] = [
     {
       title: "What you can buy",
       links: [
-        "Grocery", "Fruits and vegetables", "Milk and dairy", "Bakery",
-        "Snacks and drinks", "Cooking ingredients", "Ready to cook",
-        "Mobiles and chargers", "Home electronics", "Small appliances",
-        "Men's clothing", "Women's clothing", "Kids' clothing", "Footwear",
-        "Bags and accessories", "Home and kitchen", "Cleaning supplies",
-        "Beauty and personal care", "Books and stationery", "Wholesale and bulk",
+        "Grocery", "Fruits and vegetables", "Milk and dairy",
+        "Mobiles and electronics", "Clothing and footwear",
+        "Home and kitchen", "Beauty and personal care", "Wholesale and bulk",
+        "See everything",
       ],
     },
   ],
@@ -20,16 +18,15 @@ const COLUMNS: { title: string; links: string[] }[][] = [
       title: "How AARUVO helps",
       links: [
         "Shop by talking", "Read the screen aloud", "Shop in Tamil or English",
-        "Search with a photo", "Compare two products", "Stay inside a budget",
-        "Plan a meal or a task", "Buy from shops near you",
+        "Stay inside a budget", "Buy from shops near you",
         "Set up monthly items", "Get help after delivery",
       ],
     },
     {
       title: "Good to know",
       links: [
-        "How payment works", "Why we do not take cash", "Delivery and tracking",
-        "If an item is missing", "Returns and exchanges", "Prices and charges",
+        "How payment works", "Delivery and tracking", "If an item is missing",
+        "Returns and exchanges", "Prices and charges",
       ],
     },
   ],
@@ -38,14 +35,13 @@ const COLUMNS: { title: string; links: string[] }[][] = [
       title: "For shop owners",
       links: [
         "List your shop", "Add items by talking", "Get orders nearby",
-        "Get paid to your bank", "Wholesale selling", "Help for shop owners",
+        "Get paid to your bank", "Help for shop owners",
       ],
     },
     {
       title: "Company",
       links: [
         "About AARUVO", "Careers", "Contact us", "Privacy", "Terms",
-        "Your data and choices",
       ],
     },
   ],
@@ -107,18 +103,18 @@ export default function Footer() {
   return (
     <footer className="mt-[var(--sec-mt)] bg-[#f6f9fc]">
       <div className="w-full px-[var(--hero-indent)]">
-        <div className="grid gap-x-[clamp(24px,3vw,60px)] gap-y-10 py-[clamp(30px,2.8vw,56px)] lg:grid-cols-[1.6fr_1fr_1fr]">
+        <div className="grid gap-x-[clamp(24px,3vw,60px)] gap-y-[clamp(26px,2.2vw,44px)] py-[clamp(26px,2.3vw,46px)] sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr]">
           <div>
             <h2 className="text-[length:var(--cust-lead)] font-medium leading-[1.3] tracking-[-0.015em] text-navy">
               Ready to try it?
             </h2>
-            <p className="mt-[clamp(8px,0.8vw,16px)] max-w-[42ch] text-[length:var(--cust-body)] leading-[1.55] text-slate-body">
+            <p className="mt-[clamp(7px,0.7vw,14px)] max-w-[42ch] text-[length:var(--cust-body)] leading-[1.5] text-slate-body">
               Open AARUVO, say what you need, and see how far you get. If you
               get stuck, we are one message away.
             </p>
             <a
               href="#"
-              className="group mt-[clamp(14px,1.3vw,26px)] inline-flex items-center gap-1.5 rounded-[4px] bg-brand px-[clamp(12px,1vw,20px)] py-[clamp(8px,0.62vw,13px)] text-[length:var(--cust-small)] font-semibold leading-none text-white transition-colors duration-200 hover:bg-brand-hover"
+              className="group mt-[clamp(12px,1.1vw,22px)] inline-flex items-center gap-1.5 rounded-[4px] bg-brand px-[clamp(12px,1vw,20px)] py-[clamp(8px,0.62vw,13px)] text-[length:var(--cust-small)] font-semibold leading-none text-white transition-colors duration-200 hover:bg-brand-hover"
             >
               Talk to us
               <span className="transition-transform duration-200 group-hover:translate-x-[2px]">
@@ -139,7 +135,7 @@ export default function Footer() {
           {ASIDES.map((a) => (
             <div key={a.lead} className="text-[length:var(--cust-body)]">
               <Glyph kind={a.icon} />
-              <p className="mt-[clamp(12px,1.1vw,22px)] font-semibold text-navy">
+              <p className="mt-[clamp(9px,0.85vw,17px)] font-semibold text-navy">
                 {a.lead}
               </p>
               <p className="mt-[0.35em] max-w-[34ch] leading-[1.55] text-slate-body">
@@ -152,23 +148,23 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 border-t border-line text-[length:var(--cust-small)] md:grid-cols-4">
+        <div className="grid grid-cols-2 border-t border-line text-[13px] md:grid-cols-4 lg:text-[length:var(--cust-small)]">
           {COLUMNS.map((groups, i) => (
             <div
               key={groups[0].title}
-              className={`space-y-[clamp(20px,1.8vw,36px)] py-[clamp(24px,2.2vw,44px)] pr-[clamp(12px,1.4vw,28px)] ${
-                i > 0 ? "border-l border-dashed border-line pl-[clamp(12px,1.4vw,28px)]" : ""
-              }`}
+              className={`space-y-[clamp(16px,1.5vw,30px)] py-[clamp(18px,1.7vw,34px)] pr-[clamp(10px,1.2vw,24px)] ${
+                i > 0 ? "md:border-l md:border-dashed md:border-line md:pl-[clamp(10px,1.2vw,24px)]" : ""
+              } ${i % 2 === 1 ? "border-l border-dashed border-line pl-[clamp(10px,1.2vw,24px)]" : ""}`}
             >
               {groups.map((g) => (
                 <div key={g.title}>
                   <p className="font-semibold text-navy">{g.title}</p>
-                  <ul className="mt-[0.9em] space-y-[0.55em]">
+                  <ul className="mt-[0.75em] space-y-[2px] lg:space-y-[0.45em]">
                     {g.links.map((l) => (
                       <li key={l}>
                         <a
                           href="#"
-                          className="text-slate-body transition-colors duration-150 hover:text-navy"
+                          className="block py-[5px] text-slate-body transition-colors duration-150 hover:text-navy lg:inline lg:py-0"
                         >
                           {l}
                         </a>
@@ -184,7 +180,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="flex items-center justify-between gap-6 border-t border-line py-[clamp(18px,1.6vw,32px)] text-[length:var(--cust-small)]">
+        <div className="flex flex-wrap-reverse items-center justify-between gap-x-6 gap-y-4 border-t border-line py-[clamp(16px,1.4vw,28px)] text-[length:var(--cust-small)]">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <a
               href="#"
@@ -202,11 +198,11 @@ export default function Footer() {
           </div>
 
           <Image
-            src="/aaruvo-icon.png"
-            alt=""
-            width={433}
+            src="/aaruvo-logo.png"
+            alt="AARUVO"
+            width={1918}
             height={479}
-            className="h-6 w-auto shrink-0"
+            className="h-[var(--footer-logo)] w-auto shrink-0"
           />
         </div>
       </div>

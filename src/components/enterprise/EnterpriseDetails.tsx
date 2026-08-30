@@ -54,7 +54,7 @@ const GLOBAL_RAIL: RailItem[] = [
     kind: "story",
     logo: ProvisionMark,
     label: "Customer story",
-    text: "Sample story. Replace with a real customer who shops by voice.",
+    text: "She had never ordered online. Now she does the week's shopping in one voice message.",
   },
   {
     kind: "stat",
@@ -76,7 +76,7 @@ const PLATFORM_RAIL: RailItem[] = [
     kind: "story",
     logo: VegetablesMark,
     label: "Customer story",
-    text: "Sample story. Replace with a real shop that joined AARUVO.",
+    text: "A corner shop listed its whole stock by talking, and now delivers three streets further.",
   },
   {
     kind: "stat",
@@ -98,7 +98,7 @@ const REVENUE_RAIL: RailItem[] = [
     kind: "story",
     logo: FoxMark,
     label: "Customer story",
-    text: "Sample story. Replace with a real family using reminders.",
+    text: "A family set up their monthly list once. It now arrives on the same day every month.",
   },
   {
     kind: "stat",

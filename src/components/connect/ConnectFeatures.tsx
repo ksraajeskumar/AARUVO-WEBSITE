@@ -175,11 +175,11 @@ function SettingsPanel() {
           <span className="text-[0.85em] text-brand">Edit</span>
         </div>
         <div className="mt-[1em] space-y-[0.35em] text-[0.85em] leading-[1.5] text-slate-body">
-          <p className="font-semibold text-navy">Sample name</p>
-          <p>sample@aaruvo.com</p>
-          <p>Born on 8 June 1988</p>
-          <p>Inlingual, Shakuntala Apartment</p>
-          <p>110019 New Delhi</p>
+          <p className="font-semibold text-navy">Your name</p>
+          <p>you@example.com</p>
+          <p>+91 90000 00000</p>
+          <p>12, Bharathi Street</p>
+          <p>Chennai 600 001</p>
         </div>
         <p className="mt-[1.3em] text-[0.9em] font-semibold text-navy">
           Other information provided

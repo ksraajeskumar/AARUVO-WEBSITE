@@ -96,9 +96,9 @@ export default function ConnectMonetise() {
               </span>
             </span>
           }
-          quote="We've partnered with AARUVO for more than a decade to create a more fair and even playing field for our shops. AARUVO is excellent at making the complexity of money go away, being resilient, having fantastic uptime, and creating beautiful APIs."
-          name="Kaz Nejatian"
-          role="VP Product & Chief Operating Officer"
+          quote="We joined AARUVO to give our shops a fair chance against the big stores. Money reaches the shop the same week, nobody has to chase a payment, and none of us had to learn anything new."
+          name="A neighbourhood store"
+          role="example story"
         />
       </div>
     </Frame>

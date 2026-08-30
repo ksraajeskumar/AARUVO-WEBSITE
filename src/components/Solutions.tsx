@@ -1,24 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import DetailModal, { type Detail } from "./DetailModal";
 import Expand from "./Expand";
 import { CARD_DETAILS } from "@/lib/cardDetails";
-import BillingPanels from "./mocks/BillingPanels";
-import BrowserCheckout from "./mocks/BrowserCheckout";
-import PhoneCheckout from "./mocks/PhoneCheckout";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Scales the fixed-size mockups down as the cards narrow. Each step is sized
- * for the narrowest card in its range, so the 640px browser mock always lands
- * inside the card instead of clipping at its right edge.
+ * The artwork band under each card title. The renders carry their own scene
+ * and lighting, so they sit straight on the white card: `max-h-full` plus a
+ * width cap lets each one shrink with the card instead of clipping at its
+ * edge, and `items-end` keeps them planted on the card floor.
  */
-const MOCK_SCALE =
-  "origin-top-left scale-[0.43] sm:scale-[0.72] lg:scale-[0.48] xl:scale-[0.60] 2xl:scale-[0.72] min-[1792px]:scale-[0.84] min-[2048px]:scale-[0.96]";
+const ART_BAND =
+  "absolute inset-x-0 bottom-0 top-[16%] z-10 flex items-center justify-center px-[2%] lg:items-end lg:px-[4%]";
 
 function Card({
   title,
@@ -111,17 +110,23 @@ export default function Solutions() {
               />
             </div>
 
-            <div className="absolute inset-0 z-10">
-              <div className="absolute left-[6%] top-[23%]">
-                <div className={MOCK_SCALE}>
-                  <PhoneCheckout />
-                </div>
-              </div>
-              <div className="absolute left-[36%] top-[23%]">
-                <div className={MOCK_SCALE}>
-                  <BrowserCheckout />
-                </div>
-              </div>
+            <div className={`${ART_BAND} gap-[1%] lg:gap-[2%]`}>
+              <Image
+                src="/pay.png"
+                alt="A shopper paying an AARUVO Store bill of ₹532 by UPI from their phone"
+                width={1005}
+                height={1565}
+                sizes="(max-width: 1023px) 40vw, 25vw"
+                className="max-h-full w-auto max-w-[45%] lg:max-w-[42%]"
+              />
+              <Image
+                src="/pay1-cutout.png"
+                alt="The AARUVO Store checkout on the web, offering UPI, Google Pay, PhonePe, card and net banking"
+                width={1122}
+                height={1402}
+                sizes="(max-width: 1023px) 50vw, 32vw"
+                className="max-h-full w-auto max-w-[54%] lg:max-w-[52%]"
+              />
             </div>
           </Card>
 
@@ -130,18 +135,15 @@ export default function Solutions() {
             title="Get your regular items on time"
             onExpand={() => setDetail(CARD_DETAILS.billing)}
           >
-            <div className="pointer-events-none absolute inset-0 z-0">
-              <div
-                className="absolute inset-x-0 bottom-0 h-[80%]"
-                style={{
-                  background:
-                    "radial-gradient(120% 100% at 90% -6%,#FFA24B 0%,#FF9A6B 24%,rgba(255,255,255,0) 58%),radial-gradient(130% 110% at 10% 108%,#6D4AE0 0%,#9B5BEE 25%,#E86BC0 50%,#FFB07A 72%,rgba(255,255,255,0) 90%)",
-                }}
+            <div className={`${ART_BAND} pb-[3%]`}>
+              <Image
+                src="/pay3.png"
+                alt="A monthly list reminding a customer that rice and oil are due in four days, above a chart of 18 orders in the last 30 days"
+                width={1122}
+                height={1402}
+                sizes="(max-width: 1023px) 70vw, 26vw"
+                className="max-h-full w-auto max-w-full rounded-[14px]"
               />
-            </div>
-
-            <div className="absolute inset-x-0 top-[24%] z-10 px-[12%]">
-              <BillingPanels />
             </div>
           </Card>
         </div>

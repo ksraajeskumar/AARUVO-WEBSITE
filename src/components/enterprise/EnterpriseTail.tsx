@@ -255,13 +255,12 @@ export function EnterpriseWorking() {
             </span>
 
             <blockquote className="mt-[clamp(16px,1.6vw,34px)] text-[length:var(--cust-body)] font-medium leading-[1.55]">
-              &ldquo;Enterprise Support has absolutely helped us optimise
-              processing and reduce declines. Working closely with a technical
-              account manager gives us the opportunity to ask more questions and
-              get detailed answers, faster.&rdquo;
+              &ldquo;When something goes wrong we get a person, not a form.
+              Fewer payments fail now, and when one does we know the reason the
+              same day instead of waiting a week for an answer.&rdquo;
             </blockquote>
             <p className="mt-[clamp(14px,1.4vw,30px)] text-[length:var(--cust-small)]">
-              <span className="font-semibold">Sample name,</span> Head of Payments
+              <span className="font-semibold">A shop owner,</span> example story
             </p>
           </article>
         </div>

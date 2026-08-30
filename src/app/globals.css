@@ -27,7 +27,8 @@
   --header-h: clamp(68px, 4.9vw, 108px); /* 94px */
   --nav-gap: clamp(14px, 1.6vw, 34px); /* 31px */
   --nav-size: clamp(14px, 0.96vw, 21px); /* 18px */
-  --logo-size: clamp(24px, 1.56vw, 35px); /* 30px */
+  --logo-size: clamp(28px, 1.95vw, 44px); /* 37px */
+  --footer-logo: clamp(32px, 2.2vw, 50px);
   --h1-size: clamp(30px, 2.582vw, 58px); /* 49px */
   --body-size: clamp(15px, 0.896vw, 20px); /* 17px */
   --hero-pt: clamp(40px, 4vw, 90px); /* 76px */
@@ -49,6 +50,13 @@
 @media (max-width: 1023px) {
   :root {
     --hero-indent: var(--gutter);
+    /* the brand band is decoration; on a phone that 46px is a tenth of the
+       readable width, so the hero takes it back */
+    --ribbon-w: 0px;
+  }
+
+  .hero-ribbon {
+    display: none;
   }
 }
 
@@ -840,4 +848,65 @@ body {
 
 .orbit-ccw {
   animation-direction: reverse;
+}
+
+/* ── Opening splash ──────────────────────────────────────────────────────
+   The wordmark types itself in: a steps() wipe over the logo's own artwork,
+   with a caret keeping pace. `splash-done` is stamped on <html> before first
+   paint when this session has already seen it, so there is no white flash on
+   a second page load. */
+.splash-done .splash {
+  display: none !important;
+}
+
+.splash-type {
+  width: 0;
+  animation: splash-type 0.95s steps(7, end) 0.18s forwards;
+}
+
+@keyframes splash-type {
+  to {
+    width: 100%;
+  }
+}
+
+.splash-caret {
+  animation: splash-blink 0.62s steps(1, end) infinite;
+}
+
+@keyframes splash-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.splash-out {
+  animation: splash-out 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes splash-out {
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-type {
+    width: 100%;
+    animation: none;
+  }
+
+  .splash-caret {
+    animation: none;
+  }
+
+  .splash-out {
+    animation: splash-out 0.2s linear forwards;
+  }
 }

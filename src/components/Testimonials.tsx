@@ -23,32 +23,32 @@ const VOICES: Voice[] = [
     brand: "A home in Chennai",
     quote:
       "I just say what I need and the list is ready. My mother can use it too, because it reads everything out loud.",
-    name: "Sample quote,",
-    role: "replace with a real customer",
+    name: "A family in Chennai",
+    role: "example story",
   },
   {
     id: "shop",
     brand: "A shop owner",
     quote:
-      "Sample quote. Describe how a small shop added its items and started getting orders from the street.",
-    name: "Sample name 1",
-    role: "replace with a real shop owner",
+      "I added my whole shop by talking into the phone. Orders started coming from streets I never delivered to before.",
+    name: "A shop owner",
+    role: "example story",
   },
   {
     id: "first",
     brand: "A first-time user",
     quote:
-      "Sample quote. Describe how someone who had never shopped online finished an order on the first try.",
-    name: "Sample name 2",
-    role: "replace with a real customer",
+      "I had never ordered anything online. I said what I wanted, it read the list back to me, and the bag came the same evening.",
+    name: "A first-time customer",
+    role: "example story",
   },
   {
     id: "bulk",
     brand: "A wholesale buyer",
     quote:
-      "Sample quote. Describe how a bulk order was placed and delivered without a single phone call.",
-    name: "Sample name 3",
-    role: "replace with a real buyer",
+      "I send one voice message for the month's stock. No phone calls, no waiting, and the price is there before I agree.",
+    name: "A wholesale buyer",
+    role: "example story",
   },
 ];
 

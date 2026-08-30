@@ -37,16 +37,15 @@ const STUDIES: Study[] = [
         A grocery shop
       </span>
     ),
-    title:
-      "Kumar Stores helps beauty and wellness entrepreneurs grow their business with AARUVO",
+    title: "A grocery shop takes orders from three more streets",
     intro:
-      "Kumar Stores is a comprehensive business management platform empowering more than 100,000 beauty and wellness entrepreneurs with scheduling, payments and financing solutions.",
+      "A family-run grocery on a busy corner. Two people behind the counter, about four hundred items on the shelves, and customers who have been coming for years.",
     challenge:
-      "Beauty entrepreneurs struggled with scattered point solutions, leaving little time for their craft. Many needed better access to capital for growth and cash flow management.",
+      "Everyone within sight of the shop already knew it. Nobody one street further did. Writing out a stock list to put online would have taken weeks nobody had.",
     solution:
-      "Kumar Stores implemented AARUVO for easy payments deployment, AARUVO for subscriptions and AARUVO with Tap to Pay on iPhone for contactless payments. Using AARUVO's payment element, Kumar Stores added buy now, pay later options – UPI, UPI and UPI – to give clients payment flexibility.",
+      "The owner walked the aisles and said the item names into the phone. The shop was listed the same afternoon. Orders arrive as a list, payment is settled before packing, and a rider picks it up.",
     impact:
-      "Kumar Stores processes over $4 billion annually through AARUVO. BNPL options drove a 5.72% order value lift and 171% increase in average order value over cards.",
+      "Orders now come from streets the shop had never delivered to. Nothing about how the shop is run had to change, and no payment has to be chased.",
     img: "/aaruvo-basket.png",
     wordmark: (
       <span className="text-[1.5em] tracking-[0.2em] text-white">
@@ -54,50 +53,51 @@ const STUDIES: Study[] = [
       </span>
     ),
     quote:
-      "AARUVO's configuration capabilities let us build infrastructure our way while giving shops the power to do things their way.",
-    name: "Sample name 1",
-    role: "CEO, Kumar Stores",
+      "We kept running the shop the way we always have. AARUVO just brought us the people who were already looking for what we sell.",
+    name: "A grocery shop",
+    role: "example story",
   },
   {
     id: "clothes",
     tab: <span>A clothes shop</span>,
-    title: "AARUVO helps Meena Cloth Shop improve successful orders by 4%",
+    title: "A tailor starts selling to the towns nearby",
     intro:
-      "Meena Cloth Shop is a multi-channel fashion brand with 245 stores across the UK and a significant online presence that reaches more than 125 global markets.",
+      "A small tailoring shop that stitches to order and keeps ready-made stock on a rail at the front. One shop, one town, and a name people pass on by word of mouth.",
     challenge:
-      "Founded in 1948, Meena Cloth Shop was facing competition from new online retailers. It needed customer-centric, high-tech solutions for an omnichannel customer journey.",
+      "Buyers from other towns wanted bulk orders but everything went through phone calls. Sizes and counts got mixed up, and half the day went in confirming what was already agreed.",
     solution:
-      "Meena Cloth Shop engaged AARUVO, an IT consultancy, to help implement several AARUVO products to replace its fragmented system, including AARUVO, AARUVO, and AARUVO. AARUVO now processes all self-service checkouts in Meena Cloth Shop stores, as well as 100% of the retailer's online sales.",
+      "Buyers now send one voice message with the sizes and counts they want. AARUVO writes it out as a list both sides can see, and the price is agreed before a single piece is packed.",
     impact:
-      "Meena Cloth Shop has seen a 4% uplift in successful orders and a 2% uplift in customers moving from order review to completing a transaction. Now that more customers are completing checkout and more submitted payments are being approved, Meena Cloth Shop anticipates a boost in revenue.",
+      "Bulk orders arrive from towns the shop had never delivered to, and the mix-ups over sizes have stopped because the list is written down before anyone packs.",
     img: "/aaruvo-fashion.png",
     wordmark: (
       <span className="text-[1.5em] font-semibold text-white">A clothes shop</span>
     ),
     quote:
-      "Over the first 12 months of our partnership with AARUVO, we will capture millions more value in sales than we previously would have.",
-    name: "Sample name 2",
-    role: "Digital Product Lead, Meena Cloth Shop",
+      "In the first year we sold to towns we had never delivered to. The orders came in by voice, and the money came straight to the bank.",
+    name: "A clothes shop",
+    role: "example story",
   },
   {
     id: "mobile",
     tab: <span>A mobile shop</span>,
-    title: "Placeholder study — Arun Mobiles streamlines mobility payments with AARUVO",
+    title: "A mobile shop stops losing its day to the same question",
     intro:
-      "Placeholder summary. Describe the business, the markets it serves and the scale it operates at.",
+      "A counter shop selling phones, chargers, cables and covers, next to a bus stop where people stop in on their way home.",
     challenge:
-      "Placeholder challenge. Describe the fragmented systems or manual work the business was dealing with before.",
+      "Most of the day went in answering the same question: does this charger fit my phone? People came in, asked, and left without buying.",
     solution:
-      "Placeholder solution. Describe which AARUVO products the partner implemented and how they fit together.",
+      "The shop listed its stock by talking. Now a customer asks in the app which cable fits their phone, gets the answer, and comes in only when they know what to buy.",
     impact:
-      "Placeholder impact. Describe the measurable result — conversion, authorisation rate, or engineering time saved.",
+      "Fewer wasted trips for the customer and fewer wasted conversations at the counter. People arrive already knowing the item and the price.",
     img: "/aaruvo-electronics.png",
     wordmark: (
       <span className="text-[1.5em] font-semibold text-white">A mobile shop</span>
     ),
-    quote: "Placeholder quote from the customer about working with the partner.",
-    name: "Sample name 3",
-    role: "Placeholder role, Arun Mobiles",
+    quote:
+      "People ask which charger fits their phone before they come. We answer once in the app and they arrive knowing what to buy.",
+    name: "A mobile shop",
+    role: "example story",
   },
   {
     id: "bulk",
@@ -106,24 +106,25 @@ const STUDIES: Study[] = [
         A wholesale seller
       </span>
     ),
-    title: "Placeholder study — City Wholesale scales direct-to-rider sales",
+    title: "A wholesaler takes the month's order in one message",
     intro:
-      "Placeholder summary. Describe the business, the markets it serves and the scale it operates at.",
+      "A wholesale seller supplying rice, oil and dry goods in sacks and cases to small shops and to families who buy for the month.",
     challenge:
-      "Placeholder challenge. Describe the checkout or payments problem the business needed solved.",
+      "Every order started as a phone call and ended as a scribbled list. Prices were argued twice, once on the call and again at delivery.",
     solution:
-      "Placeholder solution. Describe which AARUVO products the partner implemented and how they fit together.",
+      "Buyers send one voice message for the whole month. AARUVO turns it into a list with the price against each item, and both sides agree before anything is packed.",
     impact:
-      "Placeholder impact. Describe the measurable result — conversion, basket size, or operational savings.",
+      "No phone calls, no written lists and no argument at the door, because the price everyone agreed to is on the order.",
     img: "/aaruvo-wholesale.png",
     wordmark: (
       <span className="text-[1.5em] text-white">
         A wholesale seller
       </span>
     ),
-    quote: "Placeholder quote from the customer about working with the partner.",
-    name: "Sample name 4",
-    role: "Placeholder role, City Wholesale",
+    quote:
+      "Our buyers send one voice message for the month. No phone calls, no written lists, and the price is agreed before we pack.",
+    name: "A wholesale seller",
+    role: "example story",
   },
 ];
 
